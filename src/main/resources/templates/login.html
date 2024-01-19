@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login - NeuroHealth</title>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+        <img src="/imagens/neurohealth_logo.png" alt="NeuroHealth Logo">
+        <h1>NeuroHealth</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="/">inicio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="login-container">
+    <section class="login-form">
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </main>
+            <h3>Temporário para facilitar navegação</h3>
+        <li><a th:href="@{/index_pacientes}">Entrar como Funcionário</a></li>
+        
+        <h3>Temporário para facilitar navegação</h3>
+        <li><a th:href="@{/index_dtalhes_pacientes}">Entrar como Paciente</a></li>
+  <footer>
+    <p>&copy; 2024 NeuroHealth. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
