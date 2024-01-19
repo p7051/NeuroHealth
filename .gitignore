@@ -1,0 +1,48 @@
+# Arquivos e diretórios a serem ignorados pelo Git
+
+# Arquivos do sistema operacional Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+System Volume Information/
+
+# Diretórios do sistema operacional Windows
+AppData/
+Application Data/
+Local Settings/
+Temp/
+Cookies/
+Recent/
+SendTo/
+Start Menu/
+Startup/
+Favorites/
+Links/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
+OneDrive/
+IntelGraphicsProfiles/
+
+# Arquivos do sistema operacional macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Diretórios do sistema operacional macOS
+.AppleDesktop/
+.AppleDesktopNetwork/
+.Trashes/
+
+# Diretórios do sistema operacional Linux
+lost+found/
+.cache/
+.config/
+.local/
+.log/
+.thumbnails/ 
