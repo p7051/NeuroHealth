@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles_cadastro_paciente.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>NeuroHealth - Cadastro de Exame</title>
+        
+</head>
+<body>
+    
+<header>
+    <div class="logo">
+        <img src="/imagens/neurohealth_logo.png" alt="NeuroHealth Logo">
+        <h1>NeuroHealth</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/login">Login</a></li>
+            <li th:if="${tipoUsuario == 'médico' or tipoUsuario == 'técnico' or tipoUsuario == 'secretária'}">
+                <a href="/index_exames">Lista Exames</a>
+            </li>
+            <li><a href="/">Sair</a></li>
+        </ul>
+    </nav>
+        <div th:if="${mensagem}" class="alert" th:class="${mensagemSucesso ? 'alert-success' : 'alert-danger'}">
+            <p th:text="${mensagem}"></p>
+        </div>
+</header>
+
+    <!-- ... Seu conteúdo ... -->
+    <div th:if="${mensagem}" class="alert alert-success">
+        <p th:text="${mensagem}"></p>
+    </div>
+    <div th:if="${erro}" class="alert alert-danger">
+        <p th:text="${erro}"></p>
+    </div>
+<main>
+    
+    
+<h1>Cadastrar Paciente</h1>
+<form action="/cadastrar-paciente" method="post" onsubmit="event.preventDefault(); cadastrarPaciente();">
+    Nome: <input type="text" name="nome" required><br>
+    Data de Nascimento: <input type="date" name="dataNascimento" required><br>
+    CPF: <input type="text" name="cpf" required><br>
+    RG: <input type="text" name="rg" required><br>
+    Telefone: <input type="text" name="telefone" required><br>
+    Endereço: <input type="text" name="endereco" required><br>
+    Sexo: <input type="text" name="sexo" required><br>
+    <input type="submit" value="Cadastrar Paciente" onclick="cadastrarPaciente()">
+</form>
+<h2>IDS</h2>
+<form >
+    Médico ID: <input type="text" name="Id" th:value="${id}" readonly><br>
+    Paciente ID: <input type="text" name="Id" th:value="${id}" readonly><br>
+</form>
+
+<h3>Cadastrar Médico</h3>
+<form action="/cadastrar-medico" method="post">
+    Nome: <input type="text" name="nome" required><br>
+    CRM: <input type="text" name="crm" required><br>
+    <input type="submit" value="Cadastrar Médico">
+</form>
+<h4>Cadastrar Exame</h4>
+<form action="/cadastrar-exame" method="post">
+    Convenio: <input type="text" name="convenio"><br>
+    Médico Avaliador ID: <input type="text" name="medicoAvaliadorId"><br>
+    Usa Medicação: <input type="checkbox" name="usaMedicacao"><br>
+    Observações: <textarea name="observacoes"></textarea><br>
+    Médico Requisitante Nome: <input type="text" name="medicoRequisitanteNome"><br>
+    CRM Médico Requisitante: <input type="text" name="crmMedicoRequisitante"><br>
+    Paciente ID: <input type="text" name="pacienteId"><br>
+    Tipo de Exame: <input type="text" name="tipoExame"><br>
+    Alterações: <input type="text" name="alteracoes"><br>
+    Laudo Médico: <textarea name="laudoMedico"></textarea><br>
+    Equipamento Descrição: <input type="text" name="equipamentoDescricao"><br>
+    Data do Exame: <input type="date" name="dataExame"><br>
+    <input type="submit" value="Cadastrar Exame">
+</form>
+
+    
+    
+        </main>
+
+<footer>
+    <p>&copy; 2024 NeuroHealth. Todos os direitos reservados.</p>
+</footer>
+<script th:inline="javascript">
+        
+    function cadastrarPaciente() {
+        var form = document.getElementById('cadastrar-paciente-form');
+
+        // Certifique-se de que o formulário foi encontrado
+        if (form) {
+            var formData = new FormData(form);
+
+            // Enviar os dados do formulário usando Ajax
+            fetch('/cadastrar-paciente', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Exibir mensagem de sucesso ou erro
+                showAlert(data.message, data.success);
+            })
+            .catch(error => {
+                console.error('Erro ao processar a solicitação:', error);
+            });
+        } else {
+            console.error('Formulário não encontrado.');
+        }
+    }
+
+
+        function showAlert(message, isSuccess) {
+            var alertBox = document.getElementById('alert-box');
+            alertBox.innerText = message;
+
+            if (isSuccess) {
+                alertBox.style.backgroundColor = 'green';
+            } else {
+                alertBox.style.backgroundColor = 'red';
+            }
+
+            alertBox.style.display = 'block';
+
+            // Opcionalmente, você pode ocultar o alerta após um certo tempo
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+            }, 5000); // 5000 milissegundos = 5 segundos
+        }
+    </script>
+</body>
+</html>

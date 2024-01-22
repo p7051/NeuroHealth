@@ -25,7 +25,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </nav>
   </header>
 
-  <main class="login-container">
+ <main class="login-container">
     <section class="login-form">
       <h2>Login</h2>
       <form action="/login" method="post">
@@ -37,13 +37,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
         <button type="submit">Entrar</button>
       </form>
+
+      <div class="login-instructions">
+        <p>Para entrar como paciente, use o ID como usuário e o nome como senha. Exemplo: ID: 123, Senha: João</p>
+        <p>Para entrar como funcionário, use o usuário e a senha que foram fornecidos.</p>
+      </div>
     </section>
   </main>
-            <h3>Temporário para facilitar navegação</h3>
-        <li><a th:href="@{/index_pacientes}">Entrar como Funcionário</a></li>
-        
-        <h3>Temporário para facilitar navegação</h3>
-        <li><a th:href="@{/index_dtalhes_pacientes}">Entrar como Paciente</a></li>
+           
   <footer>
     <p>&copy; 2024 NeuroHealth. Todos os direitos reservados.</p>
   </footer>

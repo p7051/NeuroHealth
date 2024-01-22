@@ -1,5 +1,3 @@
-# Arquivos e diretórios a serem ignorados pelo Git
-
 # Arquivos do sistema operacional Windows
 Thumbs.db
 ehthumbs.db
@@ -46,3 +44,8 @@ lost+found/
 .local/
 .log/
 .thumbnails/ 
+/target/
+
+# Arquivos e diretórios específicos do seu projeto que você deseja ignorar
+Ambiente de Impressão/
+Ambiente de Rede/

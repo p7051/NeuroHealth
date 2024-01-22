@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/styles.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles_detalhes_paciente.css}"/>
+    
+    <title>NeuroHealth - Detalhes do Exame</title>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="/imagens/neurohealth_logo.png" alt="NeuroHealth Logo">
+        <h1>NeuroHealth</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/index_exames">Lista Exames</a></li>
+            <li><a href="/">Sair</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="informacoes-exame">
+    <h2>Detalhes do Exame:</h2>
+    <form method="post" th:action="@{/editar_exame/{exameId}(exameId=${exame.id})}">
+        <ul>
+            <li>
+                <strong>ID do Exame:</strong> <span th:text="${exame.id}"></span>
+            </li>
+            <li>
+                <strong>Paciente:</strong> <span th:text="${exame.paciente.nome}"></span>
+            </li>
+            <li>
+                <strong>Medico Avaliador:</strong> <span th:text="${exame.medicoAvaliador.nome}"></span>
+            </li>
+            <li>
+                <strong>Convenio:</strong>
+                <input type="text" name="convenio" th:value="${exame.convenio}" />
+            </li>
+            <li>
+                <strong>Tipo de Exame:</strong>
+                <input type="text" name="tipoExame" th:value="${exame.tipoExame}" />
+            </li>
+            <li>
+                <strong>Data do Exame:</strong>
+                <input type="text" name="dataExame" th:value="${#dates.format(exame.dataExame, 'dd/MM/yyyy')}" />
+            </li>
+            <li>
+                <strong>Usa Medicação:</strong>
+                <input type="checkbox" name="usaMedicacao" th:checked="${exame.usaMedicacao}" />
+            </li>
+            
+            <li>
+                <strong>Médico Requisitante:</strong>
+                <input type="text" name="medicoRequisitanteNome" th:value="${exame.medicoRequisitanteNome}" />
+            </li>
+            <li>
+                <strong>CRM do Médico Requisitante:</strong>
+                <input type="text" name="crmMedicoRequisitante" th:value="${exame.crmMedicoRequisitante}" />
+            </li>
+            
+            
+            <li>
+                <strong>Equipamento Descrição:</strong>
+                <input type="text" name="equipamentoDescricao" th:value="${exame.equipamentoDescricao}" />
+            </li>
+        </ul>
+        <button type="submit" class="btn">Salvar Alterações</button>
+    </form>
+</section>
+
+    <section class="informacoes-paciente">
+        <h2>Informações do Paciente:</h2>
+        <form method="post" th:action="@{/editar_paciente/{exameId}(exameId=${exame.id})}">
+
+            <ul>
+                <!-- Adicione campos de entrada para as informações do paciente aqui -->
+                <li>
+                    <strong>Nome do Paciente:</strong>
+                    <input type="text" name="nomePaciente" th:value="${exame.paciente.nome}" />
+                </li>
+                <li>
+                    <strong>Data de Nascimento:</strong>
+                    <input type="text" name="dataNascimento" th:value="${#dates.format(exame.paciente.dataNascimento, 'dd/MM/yyyy')}" />
+                </li>
+                <li>
+                    <strong>CPF:</strong>
+                    <input type="text" name="cpf" th:value="${exame.paciente.cpf}" />
+                </li>
+                <li>
+                    <strong>RG:</strong>
+                    <input type="text" name="rg" th:value="${exame.paciente.rg}" />
+                </li>
+                <li>
+                    <strong>Telefone:</strong>
+                    <input type="text" name="telefone" th:value="${exame.paciente.telefone}" />
+                </li>
+                <li>
+                    <strong>Endereço:</strong>
+                    <input type="text" name="endereco" th:value="${exame.paciente.endereco}" />
+                </li>
+                <li>
+                    <strong>Sexo:</strong>
+                    <input type="text" name="sexo" th:value="${exame.paciente.sexo}" />
+                </li>
+                <!-- Repita para outros campos do paciente, se necessário -->
+            </ul>
+            <!-- Adicione um campo oculto para indicar o tipo de usuário (paciente) -->
+            <input type="hidden" name="tipoUsuario" value="paciente" />
+            <button type="submit" class="btn">Cadastrar Exame</button>
+        </form>
+    </section>
+
+    <section class="informacoes-medico">
+        <h2>Informações do Médico:</h2>
+        <form method="post" th:action="@{/editar_medico/{exameId}(exameId=${exame.id})}">
+            <ul>
+                <!-- Adicione campos de entrada para as informações do médico aqui -->
+                <li>
+                    <strong>Nome:</strong>
+                    <input type="text" name="nomeMedico" th:value="${exame.medicoAvaliador.nome}" />
+                </li>
+                <li>
+                    <strong>CRM:</strong>
+                    <input type="text" name="crm" th:value="${exame.medicoAvaliador.crm}" />
+                </li>
+                <!-- Repita para outros campos do médico, se houver -->
+            </ul>
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+    </section>
+
+    <section class="observacoes">
+        <h2>Observações do Exame:</h2>
+        <form method="post" th:action="@{/editar_observacoes/{exameId}(exameId=${exame.id})}">
+            <!-- Adicione campo de entrada para as observações aqui -->
+            <textarea rows="4" cols="50" name="observacoes" th:text="${exame.observacoes}"></textarea>
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+    </section>
+    <section class="alteracoes">
+        <h2>Alterações:</h2>
+        <form method="post" th:action="@{/editar_alteracoes/{exameId}(exameId=${exame.id})}">
+            <!-- Adicione campo de entrada para as observações aqui -->
+            <textarea rows="4" cols="50" name="alteracoes" th:text="${exame.alteracoes}"></textarea>
+            <button type="submit" class="btn">Salvar Alterações</button>
+            
+        </form>
+    </section>
+    <section class="laudo-medico">
+        <h2>Laudo Médico:</h2>
+        <form method="post" th:action="@{/editar_laudo_medico/{exameId}(exameId=${exame.id})}">
+            <!-- Adicione campo de entrada para o laudo médico aqui -->
+            <textarea rows="4" cols="50" name="laudoMedico" th:text="${exame.laudoMedico}"></textarea>
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 NeuroHealth. Todos os direitos reservados.</p>
+</footer>
+</body>
+
+</html>
